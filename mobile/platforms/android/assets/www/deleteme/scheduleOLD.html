@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Buddys Waterless Carwash</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jasny-bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/navmenu.css" rel="stylesheet">
+
+    <!-- Footer CSS -->
+    <link href="css/footer.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+      <a class="navmenu-brand visible-md visible-lg" href="#">Buddys Waterless Carwash</a>
+      <ul class="nav navmenu-nav">
+        <li><a href="./">Home</a></li>
+        <li><a href="">How It Works</a></li>
+        <li><a href="">Pricing</a></li>
+        <li><a href="">Buddys In The News</a></li>
+        <li><a href="">About Us</a></li>
+        <li><a href="">Become A Buddy</a></li>
+        <li><a href="">Contact Us</a></li>
+      </ul>
+      	<hr>
+      <ul class="nav navmenu-nav">
+        <li class="active"><a href="#">Schedule a Wash (cust)</a></li>
+        <li><a href="jobs">Jobs (emp)</a></li>
+        <li><a href="admin">Admin (adm)</a></li>
+        <li><a href="profile">My Profile (all)</a></li>
+        <li><a href="#" onClick="logout()">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+      <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Buddys Waterless Carwash</a>
+    </div>
+
+    <div class="container main-content" id="main-content-section" style="padding-bottom:150px;">
+      <div ng-controller="mainCtrl">
+
+        <!-- Begin Schedule a wash display -->
+        <div ng-show="!washInProgress">
+          <div class="page-header">
+            <h1>Schedule a Wash</h1>
+          </div>
+        	<div class="row">
+    			<div class="col-md-4 col-md-offset-1">
+    				<label for="address">Address</label>
+    				<input type="text" id="address" ng-model="address" ng-disabled="useMyLocation" class="form-control" placeholder="123 Hollywood Blvd" required autofocus title="Please Enter You Address"><br />
+    				<label for="city">City</label>
+    				<input type="text" id="city" ng-model="city" ng-disabled="useMyLocation" class="form-control" placeholder="Doe" required title="Please Enter Your City"> <br />
+    				<label for="zipCode">Zip Code</label>
+    				<input type="text" id="zipCode" ng-model="zipCode" ng-disabled="useMyLocation" class="form-control" placeholder="50014" required title="Please Enter Your Zip Code"> <br />	
+      			</div>
+      			<div class="col-md-2">
+    				<h3 class="vcenter">OR</h3>
+      			</div>
+      			<div class="col-md-4">
+            		<button class="btn btn-primary" ng-click="getLocation()" ng-show="!useMyLocation"><i class="fa fa-map-marker"></i></button>
+    		        <div id="mapHolder"></div>
+    		        <div id="mapError"></div>
+      			</div>
+    		  </div>
+
+        	<fieldset>
+      			<div class="row">
+      				<div class="col-md-4 col-md-offset-1">
+      					<label>
+      						<input type="radio" value="0" name="washType" ng-model="washType" />
+      						<img src="img/sedan.png" class="img-responsive" style="width: 100%;text-align:center;">				
+      						<h4 class="service-heading" style="text-align:center">Sedan - $20</h4>
+      					</label>
+      				</div>
+      				<div class="col-md-4 col-md-offset-1">
+      					<label>
+      						<input type="radio" value="1" name="washType" ng-model="washType" />
+      						<img src="img/truck.png" class="img-responsive" style="width: 100%;text-align:center;">
+      						<h4 class="service-heading" style="text-align:center">Non-Sedan - $23</h4>
+      					</label>
+      				</div>
+      			</div>
+      		</fieldset>
+
+          <label for="washVehicle">Choose a Vehicle</label>
+          <select class="form-control" ng-model="washVehicle" ng-options="(vehicle.color+' '+vehicle.make+' '+vehicle.model) for vehicle in vehicles">
+            <option value="">Select Vehicle</option>
+            <option ng-show="!vehicles.length">No Vehicles</option>
+          </select> <br />
+          
+          <label for="washDate">Date Of wash</label>
+      		<input type="text" id="washDate" ng-model="washDate" class="form-control" placeholder="MM/DD/YYYY" required title="Please Enter The Wash Date"> <br />
+      		<label for="washTime">Time Of wash</label>
+      		<select id="washTime" ng-model="washTime" class="form-control" required >
+      			<option value="">8:00AM - 9:00AM</option>
+      			<option>9:00AM - 10:00AM</option>
+      			<option>10:00AM - 11:00AM</option>
+      			<option>11:00AM - 12:00PM</option>
+      			<option>12:00AM - 1:00PM</option>
+      			<option>1:00PM - 2:00PM</option>
+      			<option>2:00PM - 3:00PM</option>
+      			<option>3:00PM - 4:00PM</option>
+      			<option>4:00PM - 5:00PM</option>
+      			<option>5:00PM - 6:00PM</option>
+      			<option>6:00PM - 7:00PM</option>
+      		</select>
+      		<label for="washNotes">Additional Notes</label>
+      		<textarea id="washNotes" ng-model="washNotes" class="form-control" title="Please Enter Any Wash Notes">My car has a sticker on it!</textarea><br />
+      		<button class="btn btn-danger form-control" ng-click="scheduleWash()" >Schedule Wash</button>
+        </div>
+
+        <!-- End Schedule a wash display -->
+
+        <!-- Begin display pending wash -->
+        <h3>Pending Washes</h3>
+
+        <table class="table table-hover table-striped">
+          <tr><th>Date</th><th>Time</th><th>Status</th></tr>
+          <tr ng-repeat="job in jobs">
+            <td>{{job.date}}</td>
+            <td>{{job.time}}</td>
+            <td><b>{{job.status}}</b></td>
+          </tr>
+          <tr ng-show="!myJobs.length"><td colspan="9"><p style="text-align:center"><i>No Pending Washes.</i></p></td></tr>
+        </table>
+        <!-- End Schedule a wash display -->
+
+    </div><!-- /.container -->
+  
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.0.3/ui-bootstrap-tpls.js"></script> 
+
+    <!-- JasnyBootstrap for sliding menu -->
+    <script src="js/jasny-bootstrap.min.js"></script>
+
+    <!-- swipe detection Javascript -->
+    <script src="js/custom.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/user-functions.js"></script>
+
+    <!-- Profile Management JS -->
+    <script src="js/schedule.js"></script>
+
+    <!-- Google Maps JS -->
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <!-- Parse -->
+    <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+
+    <!-- Hammer.JS Gesture Detection -->
+    <script src="js/hammer.js"></script>
+
+    <!-- Stripe.js -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <!-- Stripe public key TODO: Replace w/ live key -->
+    <script type="text/javascript">
+      Stripe.setPublishableKey('pk_test_xWbIpv2iutPaLQ7o45yX1gu3');
+    </script>
+
+  </body>
+</html>

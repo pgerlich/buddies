@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+
+    <title>Buddys Waterless Carwash</title>
+    <!-- Agency CSS -->
+    <link href="css/agency.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Sidr -->
+    <link href="css/jquery.sidr.light.css" rel="stylesheet">
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <!-- Footer CSS -->
+    <link href="css/footer.css" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <style>
+        #mobile-header {
+            display: none;
+        }
+        @media only screen and (max-width: 767px){
+            #mobile-header {
+                display: block;
+            }
+        }
+    </style>
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+</head>
+
+<body style="background: url(img/stockvault-car-headlight.jpg);background-size: cover;background-repeat: no-repeat; background-position: 50% 0px;">
+<div id="page-top"></div>
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <a id="simple-menu" href="#sidr"><button type="button" class="navbar-toggle" style="float:left; display:inline-block; margin-left:15px;background-color: #ddd;">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+
+    </button></a>
+    <div class="container">
+
+        <div class="navbar-header page-scroll">
+
+            <a class="navbar-brand page-scroll smoothScroll" href="#page-top">Buddys Waterless Carwash</a>
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden active">
+                    <a class="smoothScroll" href="#page-top"></a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Company Logo</h3>
+
+        <p class="footer-links">
+            <a href="index.html">Home</a>
+            ·
+            <a href="buddiesnews.html">Buddys In The News</a>
+            ·
+            <a href="becomeabuddy.html">Become A Buddy</a>
+            ·
+            <a href="login.html" >Login</a>
+        </p>
+
+        <p class="footer-company-name">Buddys Waterless Carwash &copy; 2016</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>321 West Rosemary Street</span>Chapel Hill, NC 27514</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>(555) 555-5555</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:Austin_Helms@kenan-flagler.unc.edu">Austin_Helms@kenan-flagler.unc.edu</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>About the company</span>
+            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<div id="sidr" class="sidr left" style="transition: left 0.2s ease;"><div class="sidr-inner">
+    <ul class="sidr-class-horizontal sidr-class-menu sidr-class-expanded">
+        <li style="padding: 0 15px; font-size: large;">Buddys Waterless Carwash</li>
+        <li><a class="sidr-class-smooth" href="index.html">Home</a></li>
+
+        <li class="active"><a class="sidr-class-smooth" href="buddiesnews.html">Buddys in the News</a></li>
+
+        <li><a class="sidr-class-smooth" href="becomeabuddy.html">Become a Buddy</a></li>
+
+
+    </ul>
+    <hr />
+    <div ng-controller="navBar">
+        <ul class="sidr-class-horizontal sidr-class-menu sidr-class-expanded">
+            <li ng-show="role == -1"><a class="sidr-class-smooth" href="login.html">Login</a></li>
+            <li ng-show="role == 0"><a class="sidr-class-smooth" href="schedule.html">Schedule a Wash (cust)</a></li>
+            <li ng-show="role == 1"><a class="sidr-class-smooth" href="jobs.html">Jobs (emp)</a></li>
+            <li ng-show="role == 2"><a class="sidr-class-smooth" href="admin.html">Admin (adm)</a></li>
+            <li ng-show="!(role == -1)"><a class="sidr-class-smooth" href="profile.html">My Profile (all)</a></li>
+            <li ng-show="!(role == -1)"><a class="sidr-class-smooth" href="#" onClick="logout()">Logout</a></li>
+
+        </ul>
+    </div>
+</div></div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Sidr -->
+<script src="js/jquery.sidr.js"></script>
+
+<!-- Custom Javascript -->
+<script src="js/custom2.js"></script>
+
+<!-- Parse -->
+<script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+
+<!-- Custom JS -->
+<script src="js/user-functions.js"></script>
+
+
+<!-- Profile Management JS -->
+<script src="js/navbarIndex.js"></script>
+
+<!-- Hammer.JS Gesture Detection-->
+<script src="js/hammer.js"></script>
+
+<!-- Smooth same-page scrolling -->
+<script type="text/javascript" src="js/smoothscroll.js"></script>
+<!-- Below could handle the sliding menu closing each time a same page link is clicked for the scrolling navigation-->
+<script type="text/javascript">
+    $(window).scroll(function() {
+        if ($(".navbar").offset().top > 50) {
+            $(".navbar-fixed-top").addClass("top-nav-collapse");
+        } else {
+            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        }
+    });
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('#simple-menu').sidr();
+    });
+</script>
+
+</body>
+</html>
