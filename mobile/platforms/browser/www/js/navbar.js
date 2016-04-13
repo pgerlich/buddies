@@ -9,7 +9,7 @@ angular.module("myApp").controller("navBar", function($scope){
     $scope.user = Parse.User.current();
 
     if (!$scope.user){
-        window.location.assign("login")
+        window.location.assign("login.html")
     } else {
 
         $scope.role = $scope.user.get("role");

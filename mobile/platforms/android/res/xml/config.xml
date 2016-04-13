@@ -6,9 +6,9 @@
         <param name="onload" value="true" />
     </feature>
     <allow-intent href="market:*" />
-    <name>HelloCordova</name>
+    <name>Buddys</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A Apache Cordova application for Buddys Wateress Carwash.
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team

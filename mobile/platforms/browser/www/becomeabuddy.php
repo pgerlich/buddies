@@ -19,7 +19,7 @@
             //this is where you send the smtp transport email (connection used)
             $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
               ->setUsername('ogubin@iastate.edu')
-              ->setPassword('Quake369');
+              ->setPassword('password');
 
             $mailer = Swift_Mailer::newInstance($transport);
 

@@ -21,7 +21,7 @@ function redirectToProfile(){
     var currentUser = Parse.User.current();
 
     if (currentUser){
-        window.location.assign("profile")
+        window.location.assign("profile.html")
     } 
 }
 
@@ -37,7 +37,24 @@ function login(){
 
     Parse.User.logIn(email, password, {
         success: function(user) {
-            window.location.assign("profile")
+          var role = user.get("role");
+          var location = "profile.html";
+          
+          switch ( role ) {
+            case 0:
+              location = "schedule.html";
+              break;
+            case 1:
+              location = "jobs.html";
+              break;
+            case 2:
+              location = "admin.html";
+              break;
+            default:
+              break;
+          }
+
+          window.location.assign(location);
         },
 
         error: function(user, error) {
@@ -49,104 +66,9 @@ function login(){
 }
 
 /**
-    Used to tokenize the Credit Card payment form
-*/
-function tokenizeStripe(){
-  var $form = $("#payment-form");
-  Stripe.card.createToken($form, register);    
-}
-
-/**
-    Sanitize/validate input and register a user
-*/
-function register(status, response){
-  //Profile information
-  var firstName = $("#firstName").val();
-  var lastName = $("#lastName").val();
-  var phone = $("#phoneNumber").val();
-  var email = $("#inputEmail").val();
-  var password = $("#inputPassword").val();
-  var rpassword = $("#inputPasswordRepeat").val();
-
-  //Token for the credit card entry form
-  var ccToken = response.id;
-
-  //Vehicle info
-  var make = $("#vehicleMake").val();
-  var model = $("#vehicleModel").val();
-  var color = $("#vehicleColor").val();
-  var license = $("#vehicleLicense").val();
-  var vehicle = {make: make, model: model, color: color, license: license}; //Wrap in object for ease of access/passing to our function later
-
-  //TODO: Validate cc/vehicle info -- Also must validate email BEFORE here so it can be used to associate a customer in stripe
-
-    //Need the customer id before we create the stripe account
-    $.post( "php/createCustomer.php?TOKEN=" + ccToken + "&EMAIL=" + email, function( data ) {
-        //TODO: Differentiate success/failure7 if necessary
-        console.log(data);
-        var customerID = JSON.parse(data.slice(21, data.len)).id;
-      
-        //Validate first, last, phone, email, password is there
-        if($("#firstName")[0].checkValidity() && $("#lastName")[0].checkValidity() && $("#phoneNumber")[0].checkValidity() && $("#inputEmail")[0].checkValidity() && $("#inputPassword")[0].checkValidity() && $("#inputPasswordRepeat")[0].checkValidity()){
-            //validate that passwords match
-            //Set attributes of user to match the column name
-            var user = new Parse.User();
-            user.set("username", email);
-            user.set("password", password);
-            user.set("email", email);
-            user.set("role", 0); //0 --> Customer by default. Employees/Admins are added in admin panel
-            user.set("stripeAccount", customerID);
-            user.set("firstName", firstName);
-            user.set("lastName", lastName);
-            user.set("phone", phone);
-
-            //Call parse signup function
-            user.signUp(null, {
-                success: function(user) {
-                    //Create the vehicle object to associate back to this user.
-                    createVehicle(user, vehicle);
-                },
-                error: function(user, error) {
-                    // Show the error message somewhere and let the user try again.
-                    alert("Error: " + error.code + " " + error.message);
-                }
-            });
-        }
-
-    });
-
-
-}
-
-/**
-    Given a user, creates a vehicle and associates the vehicle to the user
-*/
-function createVehicle(user, vehicle){
-    var Vehicle = Parse.Object.extend("Vehicles");
-    var parseVehicle = new Vehicle();
-
-    //Setup object
-    parseVehicle.set("make", vehicle.make);
-    parseVehicle.set("model", vehicle.model);
-    parseVehicle.set("color", vehicle.color);
-    parseVehicle.set("license", vehicle.license);
-    parseVehicle.set("customer", Parse.User.current());
-
-    parseVehicle.save(null, {
-      success: function(newVehicle) {
-        window.location.assign("profile")
-      },
-      error: function(gameScore, error) {
-        alert('Failed to create new object, with error code: ' + error.message);
-      }
-    });
-}
-
-
-/**
     Log the user out
 */
 function logout(){
     Parse.User.logOut();
-    window.location.assign("login")
+    window.location.assign("login.html")
 }
