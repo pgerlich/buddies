@@ -44,14 +44,26 @@
     <script src="js/angular.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
 
-    <!-- cordova.js to make stripe checkout work -->
+    <!-- cordova.js to make stripe checkout work
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-
+-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- push notifications
+    <script type="text/javascript">
+        document.addEventListener("deviceready",
+                function () {
+                    if(window.plugins && window.plugins.OrtcPushPlugin){
+                        var OrtcPushPlugin = window.plugins.OrtcPushPlugin;
+                        OrtcPushPlugin.checkForNotifications();
+                    }
+                }, false);
+    </script>
+    -->
 </head>
 
 <body>
@@ -310,6 +322,37 @@
         });
 
     </script>
+
+    <!-- push notifications catcher script
+    <button class="btn btn-default" type="button" onclick="test_notifications()">Test Notification</button>
+    <script>
+        function test_notifications(){
+            alert('AHH!');
+
+            $.ajax({
+                type: "POST",
+                url: "https://ortc-mobilepush.realtime.co/mp/publish",
+                crossDomain: true,
+                data:  {
+                    "applicationKey": "na8lOp",
+                    "privateKey": "ZY2TWQAN4lVp",
+                    "channel" : "my_channel",
+                    "message" : "I DON'T KNOW WHAT IM DOING",
+                    "payload" : "{'sound' : 'default','badge' : '1','name' : 'Joe','age' : '48'}"
+                },
+                success: function (data) {
+                    alert( "Data Loaded: " + data );
+                },
+                error: function (err) {
+                    alert( "Data Loaded: " + err );
+                }
+            });
+
+        }
+    </script>
+    <input type="hidden" name="channel" id="channel" value="my_channel" />
+    <script type="text/javascript" src="js/push-notifications.js"></script>
+    -->
 
 </body>
 </html>

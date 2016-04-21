@@ -7,8 +7,17 @@
         "files": {}
     },
     "installed_plugins": {
+        "co.realtime.plugins.CordovaPush": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
+        "cordova-plugin-android-support-v4": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
+        "cordova-plugin-googleplayservices": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "buddys.waterless"
         }
     },
     "dependent_plugins": {}

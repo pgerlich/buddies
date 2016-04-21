@@ -6,5 +6,29 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "co.realtime.plugins.CordovaPush": {
+        "source": {
+            "type": "registry",
+            "id": "cordovapush"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-android-support-v4": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-android-support-v4"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-googleplayservices": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-googleplayservices"
+        },
+        "is_top_level": false,
+        "variables": {}
     }
 }

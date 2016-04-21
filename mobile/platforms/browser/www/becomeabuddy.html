@@ -37,7 +37,7 @@
 
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,46 +46,38 @@
     <![endif]-->
 
     <!-- Angular -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
 </head>
 
 <body>
 <div id="page-top"></div>
 
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <a id="simple-menu" href="#sidr"><button type="button" class="navbar-toggle" style="float:left; display:inline-block; margin-left:15px;background-color: #ddd;">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-
-    </button></a>
+<nav class="navbar navbar-default navbar-fixed-top vcenter ralign" role="navigation" style="background-color: red; z-index:10001;">
     <div class="container">
-
-        <div class="navbar-header page-scroll">
-
-            <a class="navbar-brand page-scroll smoothScroll" href="#page-top">Buddys Waterless Carwash</a>
-
-        </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" >
             <ul class="nav navbar-nav">
-                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li class="hidden active">
-                    <a class="smoothScroll" href="#page-top"></a>
+                <li>
+                    <a class="smoothScroll" href="index"><img src="img/BuddiesBonlySMALL.png" class="img img-responsive" /></a>
                 </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
+
+    <a id="simple-menu" href="#sidr"><button type="button" class="navbar-toggle" style="display:inline-block;margin-right:15px;background-color: red;">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar" style="background-color: white"></span>
+        <span class="icon-bar" style="background-color: white"></span>
+        <span class="icon-bar" style="background-color: white"></span>
+
+    </button></a>
     <!-- /.container -->
 </nav>
 
-<div class="container main-content" id="main-content-section" style="padding-bottom:150px; margin-top: 80px;">
+<div class="container main-content" id="main-content-section" style="padding-bottom:150px; margin-top: 100px;">
     <div class="page-header">
         <h1 style="text-transform: none;">Sign up to be a Buddy!</h1>
     </div>
@@ -94,7 +86,7 @@
         <span><em>"Choose your own hours, make money when you want, become our Buddy!"</em></span>
     </div>
 
-    <form class="form-horizontal" role="form" method="post" action="php/becomeabuddy.php">
+    <form class="form-horizontal" role="form" method="post" name ="BecomeABuddyForm" action="javascript:void(0);">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-8">
@@ -136,29 +128,27 @@
         <div class="form-group">
             <label for="human" class="col-sm-2 control-label">2 + 3 = ?</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
-                <?php echo $errHuman;?>
+                <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer" value="">
+
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-2">
-                <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+                <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary" onclick="SendEmail()">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-                <?php echo $result;?>
+            <div class="col-sm-8 col-sm-offset-2" id="responseMessage">
+
             </div>
         </div>
     </form>
 
 </div>
 
-<footer class="footer-distributed">
+<footer class="footer-distributed vcenter">
 
     <div class="footer-left">
-
-        <h3>Company Logo</h3>
 
         <p class="footer-links">
             <a href="index.html">Home</a>
@@ -170,7 +160,7 @@
             <a href="login.html" >Login</a>
         </p>
 
-        <p class="footer-company-name">Buddys Waterless Carwash &copy; 2016</p>
+        <p class="footer-company-name">Waterless Buddys &copy; 2016</p>
     </div>
 
     <div class="footer-center">
@@ -182,27 +172,21 @@
 
         <div>
             <i class="fa fa-phone"></i>
-            <p>(555) 555-5555</p>
+            <p>(828) 448-5521</p>
         </div>
 
         <div>
             <i class="fa fa-envelope"></i>
-            <p><a href="mailto:Austin_Helms@kenan-flagler.unc.edu">Austin_Helms@kenan-flagler.unc.edu</a></p>
+            <p><a href="mailto:Austin_Helms@kenan-flagler.unc.edu">buddy@waterlessbuddys.com</a></p>
         </div>
 
     </div>
 
     <div class="footer-right">
-
-        <p class="footer-company-about">
-            <span>About the company</span>
-            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-        </p>
-
         <div class="footer-icons">
 
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.facebook.com/WaterlessBuddys" target="_BLANK"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/waterlessbuddys" target="_BLANK"><i class="fa fa-twitter"></i></a>
 
         </div>
 
@@ -210,7 +194,7 @@
 
 </footer>
 
-<div id="sidr" class="sidr left" style="transition: left 0.2s ease;"><div class="sidr-inner">
+<div id="sidr" class="sidr" style="transition: left 0.2s ease; display:none;"><div class="sidr-inner">
     <ul class="sidr-class-horizontal sidr-class-menu sidr-class-expanded">
         <li style="padding: 0 15px; font-size: large;">Buddys Waterless Carwash</li>
         <li><a class="sidr-class-smooth" href="index.html">Home</a></li>
@@ -223,10 +207,10 @@
     <div ng-controller="navBar">
         <ul class="sidr-class-horizontal sidr-class-menu sidr-class-expanded">
             <li ng-show="role == -1"><a class="sidr-class-smooth" href="login.html">Login</a></li>
-            <li ng-show="role == 0"><a class="sidr-class-smooth" href="schedule.html">Schedule a Wash (cust)</a></li>
-            <li ng-show="role == 1"><a class="sidr-class-smooth" href="jobs.html">Jobs (emp)</a></li>
-            <li ng-show="role == 2"><a class="sidr-class-smooth" href="admin.html">Admin (adm)</a></li>
-            <li ng-show="!(role == -1)"><a class="sidr-class-smooth" href="profile.html">My Profile (all)</a></li>
+            <li ng-show="role == 0"><a class="sidr-class-smooth" href="schedule.html">Schedule a Wash</a></li>
+            <li ng-show="role == 1"><a class="sidr-class-smooth" href="jobs.html">Jobs</a></li>
+            <li ng-show="role == 2"><a class="sidr-class-smooth" href="admin.html">Admin</a></li>
+            <li ng-show="!(role == -1)"><a class="sidr-class-smooth" href="profile.html">My Profile</a></li>
             <li ng-show="!(role == -1)"><a class="sidr-class-smooth" href="#" onClick="logout()">Logout</a></li>
 
         </ul>
@@ -246,7 +230,7 @@
 <script src="js/custom2.js"></script>
 
 <!-- Parse -->
-<script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+<script src="js/parse-1.6.12.min.js"></script>
 
 <!-- Custom JS -->
 <script src="js/user-functions.js"></script>
@@ -271,46 +255,42 @@
     });
 
 </script>
+
+<!-- Submit form via ajax to PHP on hosted server -->
 <script>
-    $(document).ready(function() {
-        $('#simple-menu').sidr();
-    });
+    function SendEmail()
+    {
+        if($("#name")[0].checkValidity() && $("#email")[0].checkValidity() && $("#city")[0].checkValidity() && $("#state")[0].checkValidity() && $("#zipcode")[0].checkValidity()) {
+
+
+            // Global Url of php script
+            GolbalURL = "http://paulgerlich.com/__projects/buddys/php/";
+
+            var name = $("[name='name']").val();
+            var email = $("[name='email']").val();
+            var city = $("[name='city']").val();
+            var state = $("[name='state']").val();
+            var zipcode = $("[name='zipcode']").val();
+            var reference = $("[name='reference']").val();
+            var comments = $("[name='comments']").val();
+            var human = $("[name='human']").val();
+
+            jQuery.ajax({
+                type: "POST",
+                url: GolbalURL + "Sendmail.php",
+
+                data: "name=" + name + "&email=" + email + "&city=" + city + "&state=" + state + "&zipcode=" + zipcode + "&reference=" + reference + "&comments=" + comments + "&human=" + human + "&submit=1",
+                dataType: "html",
+                cache: false,
+                success: function (response) {
+                    $("#responseMessage").html(response);
+                    //alert(response);
+                }
+            });
+        }
+    }
 </script>
+
 
 </body>
 </html>
-
-
-<?php
-    if (isset($_POST["submit"])) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $zipcode = $_POST['zipcode'];
-        $reference = $_POST['reference'];
-        $comments = $_POST['comments'];
-        $human = intval($_POST['human']);
-        $from = 'Become a Buddy Form Results';
-        $to = 'ogubin@iastate.edu';
-        $subject = 'Become a Buddy Form Results';
-
-        $body = "From: $name\n E-Mail: $email\n Location: $city\n State: $state\n Zipcode: $zipcode\n How they heard about us: $reference\n Additional Comments: &comments";
-
-
-        //Check if simple anti-bot test is correct
-        if ($human !== 5) {
-            $errHuman = 'Your anti-spam is incorrect';
-        }
-
-// If there are no errors, send the email
-if (!$errHuman) {
-    if (mail ($to, $subject, $body, $from)) {
-        $result='<div class="alert alert-success">Thank You! We will be in touch</div>';
-} else {
-$result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
-}
-}
-}
-return true;
-?>

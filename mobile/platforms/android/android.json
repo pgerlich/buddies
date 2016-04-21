@@ -5,9 +5,61 @@
     },
     "config_munge": {
         "files": {
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest/application": [
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<activity android:exported=\"true\" android:name=\"co.realtime.plugins.android.cordovapush.OrtcPushHandlerActivity\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"co.realtime.plugins.android.cordovapush.GcmReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><category android:name=\"buddys.waterless\" /></intent-filter></receiver>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.google.android.c2dm.permission.RECEIVE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<permission android:name=\"buddys.waterless.permission.C2D_MESSAGE\" android:protectionLevel=\"signature\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"buddys.waterless.permission.C2D_MESSAGE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
             "res/xml/config.xml": {
                 "parents": {
                     "/*": [
+                        {
+                            "xml": "<feature name=\"OrtcPushPlugin\"><param name=\"android-package\" value=\"co.realtime.plugins.android.cordovapush.OrtcPushPlugin\" /></feature>",
+                            "count": 1
+                        },
                         {
                             "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
@@ -18,12 +70,29 @@
         }
     },
     "installed_plugins": {
+        "cordova-plugin-android-support-v4": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
+        "cordova-plugin-googleplayservices": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
+        "co.realtime.plugins.CordovaPush": {
+            "PACKAGE_NAME": "buddys.waterless"
+        },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "buddys.waterless"
         }
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/co.realtime.plugins.CordovaPush/www/OrtcPlugin.js",
+            "id": "co.realtime.plugins.CordovaPush.OrtcPushPlugin",
+            "pluginId": "co.realtime.plugins.CordovaPush",
+            "clobbers": [
+                "OrtcPushPlugin"
+            ]
+        },
         {
             "file": "plugins/cordova-plugin-whitelist/whitelist.js",
             "id": "cordova-plugin-whitelist.whitelist",
@@ -32,6 +101,9 @@
         }
     ],
     "plugin_metadata": {
+        "cordova-plugin-android-support-v4": "21.0.1",
+        "cordova-plugin-googleplayservices": "19.0.3",
+        "co.realtime.plugins.CordovaPush": "0.1.12",
         "cordova-plugin-whitelist": "1.2.1"
     }
 }
